@@ -154,9 +154,12 @@ defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
 # Automatically illuminate built-in MacBook keyboard in low light
 #defaults write com.apple.BezelServices kDim -bool true
+
 # Turn off keyboard illumination when computer is not used for 5 minutes
 #defaults write com.apple.BezelServices kDimTime -int 300
 
+#Use all F1, F2, etc keys as standard function keys
+defaults write -g com.apple.keyboard.fnState -boolean true
 
 
 ###############################################################################
