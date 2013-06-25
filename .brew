@@ -47,6 +47,7 @@ brew install tree
 brew install webkit2png
 brew install zopfli
 
+
 brew tap homebrew/versions
 brew install lua52
 
@@ -62,22 +63,30 @@ function installcask() {
 	fi
 }
 
-installcask dropbox
+#installcask dropbox
 installcask google-chrome
 installcask google-chrome-canary
+installcask opera
+installcask firefox-aurora
+
 installcask shortcat
 installcask imagealpha
 installcask imageoptim
 # installcask iterm2
-installcask macvim
+#installcask macvim
 installcask miro-video-converter
 #installcask sublime-text
-installcask the-unarchiver
+#installcask the-unarchiver
 #installcask tor-browser
 #installcask transmission
 #installcask ukelele
 installcask virtualbox
 installcask vlc
-
+installcask pencil
+installcask mocksmtp
+installcask skype
+installcask sourcetree
+installcask vagrant
+installcask thunderbird
 # Remove outdated versions from the cellar
 brew cleanup
