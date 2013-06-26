@@ -68,6 +68,7 @@ installcask google-chrome
 installcask google-chrome-canary
 installcask opera
 installcask firefox-aurora
+installcask anvil
 
 installcask shortcat
 installcask imagealpha
