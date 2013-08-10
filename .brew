@@ -88,6 +88,6 @@ installcask mocksmtp
 installcask skype
 installcask sourcetree
 installcask vagrant
-installcask thunderbird
+installcask keka
 # Remove outdated versions from the cellar
 brew cleanup
