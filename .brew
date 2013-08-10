@@ -89,5 +89,7 @@ installcask skype
 installcask sourcetree
 installcask vagrant
 installcask keka
+installcask gimp
+installcask inkscape
 # Remove outdated versions from the cellar
 brew cleanup
