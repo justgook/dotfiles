@@ -1,7 +1,6 @@
 #
 ### GLOBAL VARIABLES
 #
-
 # Load private config
 # (local settings or computer specific config for example)
 if [ -f $HOME/.config/fish/private.fish ]

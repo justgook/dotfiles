@@ -3,5 +3,7 @@
 fish_add_path /usr/local/bin -P
 
 # on m1 macs, homebrew installs things in /opt/homebrew
-contains /opt/homebrew/bin
-or set path /opt/homebrew/bin $path
+# contains /opt/homebrew/bin
+# or set path /opt/homebrew/bin $path
+
+fish_add_path /opt/homebrew/bin  -P
