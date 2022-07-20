@@ -20,10 +20,18 @@ function fish_prompt --description 'Write out the prompt'
 
     # Display second line
     set -l color_cursor '8829F9'
+    set -l cl_red_orange 'F52D2D'
     printf '\n'
-    set_color white -b $color_cursor
-    printf '  '
-    set_color $color_cursor -b normal
-    printf ' '
+    if test $last_status -eq 0
+      set_color white -b $color_cursor
+      printf '  '
+      set_color $color_cursor -b normal
+      printf ' '
+    else
+      set_color white -b $cl_red_orange
+      printf ' %s ' $last_status
+      set_color $cl_red_orange -b normal
+      printf ' '
+    end
     set_color normal
 end
