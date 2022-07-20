@@ -100,3 +100,9 @@ set __fish_git_prompt_char_upstream_prefix ' '
 set fish_prompt_pwd_dir_length 0
 
 # fish_prompt defined in ~/.config/fish/functions/fish_prompt.fish
+
+
+# Bun
+set -Ux BUN_INSTALL "/Users/googk/.bun"
+set -px --path PATH "/Users/googk/.bun/bin"
+
