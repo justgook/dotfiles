@@ -17,6 +17,11 @@ return require('packer').startup(function(use)
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-lua/telescope.nvim'
+    -- Language server
+    use 'neovim/nvim-lspconfig'
+    use 'nvim-lua/completion-nvim'
+    use 'anott03/nvim-lspinstall'
+    -- Nice view for keys (good why learning vim)
     use {
         "folke/which-key.nvim",
         config = function()
