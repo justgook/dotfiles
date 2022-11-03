@@ -7,20 +7,18 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
     use 'folke/tokyonight.nvim'
+    use 'nvim-lua/popup.nvim'
+    use 'nvim-lua/plenary.nvim'
 
     use {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
     use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/nvim-treesitter-context'
+
     --Fuzzy Finding
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
     use 'nvim-lua/telescope.nvim'
-    -- Language server
-    use 'neovim/nvim-lspconfig'
-    use 'nvim-lua/completion-nvim'
-    use 'anott03/nvim-lspinstall'
     -- Nice view for keys (good why learning vim)
     use {
         "folke/which-key.nvim",
