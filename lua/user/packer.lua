@@ -20,17 +20,17 @@ return require('packer').startup(function(use)
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/nvim-treesitter-context'
 
-   -- use {
-   --     "folke/twilight.nvim",
-   --     config = function()
-   --         require("twilight").sestup {
-   --             -- `Twilight` : toggle twilight
-   --             -- your configuration comes here
-   --             -- or leave it empty to use the default settings
-   --             -- refer to the configuration section below
-   --         }
-   --     end
-   -- }
+    -- use {
+    --     "folke/twilight.nvim",
+    --     config = function()
+    --         require("twilight").sestup {
+    --             -- `Twilight` : toggle twilight
+    --             -- your configuration comes here
+    --             -- or leave it empty to use the default settings
+    --             -- refer to the configuration section below
+    --         }
+    --     end
+    -- }
 
     --Fuzzy Finding
     use 'nvim-lua/telescope.nvim'
