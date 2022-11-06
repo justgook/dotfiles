@@ -30,6 +30,11 @@ require('nvim-treesitter.configs').setup {
         enable = true,
     }
 }
+vim.api.nvim_create_autocmd(
+    { "BufRead", "BufNewFile" },
+    { pattern = { "*.libsonnet" }, command = "setfiletype jsonnet" }
+)
+
 
 --vim.opt.foldmethod = "expr"
 --vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

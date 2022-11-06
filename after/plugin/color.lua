@@ -1,4 +1,3 @@
-vim.opt.background = "dark"
 require("tokyonight").setup({
     transparent = false,
 })

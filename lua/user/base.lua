@@ -1,3 +1,10 @@
+vim.cmd("autocmd!")
+
+vim.scriptencoding = 'utf-8'
+vim.opt.encoding = 'utf-8'
+vim.opt.fileencoding = 'utf-8'
+
+
 vim.opt.timeoutlen = 50 --Time in milliseconds to wait for a mapped sequence to complete.
 vim.opt.guicursor = ""
 
@@ -22,8 +29,15 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
-vim.opt.termguicolors = true
 
+-- https://github.com/craftzdog/dotfiles-public/blob/master/.config/nvim/lua/craftzdog/base.lua 
+vim.opt.shell = 'fish'
+vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+vim.opt.backspace = { 'start', 'eol', 'indent' }
+vim.opt.path:append { '**' } -- Finding files - Search down into subfolder
+-- Undercurl
+vim.cmd([[let &t_Cs = "\e[4:3m"]])
+vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 -- Give more space for displaying messages.
 vim.opt.cmdheight = 1

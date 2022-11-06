@@ -1,3 +1,5 @@
-require("user.set")
+require("user.base")
+require("user.macos")
+require("user.highlights")
 require("user.remap")
 require("user.packer")
