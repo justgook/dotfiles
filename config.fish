@@ -1,11 +1,6 @@
 #
 ### GLOBAL VARIABLES
 #
-# Load private config
-# (local settings or computer specific config for example)
-if [ -f $HOME/.config/fish/private.fish ]
-    source $HOME/.config/fish/private.fish
-end
 
 # colors for ls command
 set -gx lscolors "cxbgdxdxbxdgeghegeacad"
@@ -35,17 +30,8 @@ if [ -f $HOME/.config/fish/env/index.fish ]
     source $HOME/.config/fish/env/index.fish
 end
 
-#
-### ALIAS
-#
-# Main
-if [ -f $HOME/.config/fish/aliases/main.fish ]
-    source $HOME/.config/fish/aliases/main.fish
-end
-
-# Git
-if [ -f $HOME/.config/fish/aliases/git.fish ]
-    source $HOME/.config/fish/aliases/git.fish
+if [ -f $HOME/.config/fish/aliases/index.fish ]
+    source $HOME/.config/fish/aliases/index.fish
 end
 
 #
