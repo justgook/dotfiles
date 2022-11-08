@@ -30,7 +30,6 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
--- https://github.com/craftzdog/dotfiles-public/blob/master/.config/nvim/lua/craftzdog/base.lua 
 vim.opt.shell = 'fish'
 vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
 vim.opt.backspace = { 'start', 'eol', 'indent' }
@@ -39,8 +38,10 @@ vim.opt.path:append { '**' } -- Finding files - Search down into subfolder
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
+
+
 -- Give more space for displaying messages.
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 5
 
 -- Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 -- delays and poor user experience.

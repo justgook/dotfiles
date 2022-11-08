@@ -1,11 +1,8 @@
-local M = {}
+local npairs = require("nvim-autopairs")
 
-function M.setup()
-  local npairs = require "nvim-autopairs"
-  npairs.setup {
+local npairs = require "nvim-autopairs"
+npairs.setup {
     check_ts = true,
-  }
-  npairs.add_rules(require "nvim-autopairs.rules.endwise-lua")
-end
+}
+npairs.add_rules(require "nvim-autopairs.rules.endwise-lua")
 
-return M

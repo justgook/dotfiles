@@ -1,4 +1,5 @@
 require("user.base")
+require("user.autosave")
 require("user.macos")
 require("user.highlights")
 require("user.remap")

@@ -30,6 +30,7 @@ require('nvim-treesitter.configs').setup {
         enable = true,
     }
 }
+-- move to filetype / filextension file ?
 vim.api.nvim_create_autocmd(
     { "BufRead", "BufNewFile" },
     { pattern = { "*.libsonnet" }, command = "setfiletype jsonnet" }

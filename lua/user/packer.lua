@@ -6,23 +6,33 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
+    -- plugins dependencies
+    use 'nvim-lua/popup.nvim'
+    use 'nvim-lua/plenary.nvim'
     -- Theme / colors / icons
     use 'folke/tokyonight.nvim'
     use 'nvim-tree/nvim-web-devicons'
 
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
 
     use 'nvim-treesitter/nvim-treesitter'
-    use 'nvim-treesitter/nvim-treesitter-context'
+    -- use 'nvim-treesitter/nvim-treesitter-context'
     use {
         "windwp/nvim-autopairs",
-        wants = "nvim-treesitter",
-        module = { "nvim-autopairs.completion.cmp", "nvim-autopairs" },
-
-        config = function() require("nvim-autopairs").setup() end
+        config = function() require("nvim-autopairs").setup {} end
+    }   
+    --telescope
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.x',
+        requires = { {'nvim-lua/plenary.nvim'} }
     }
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+
+
+    -- Project directory
+    use "ahmedkhalf/project.nvim"
+
+    use "numToStr/Comment.nvim" -- Easily comment stuff
     -- use {
     --     "folke/twilight.nvim",
     --     config = function()
@@ -35,8 +45,6 @@ return require('packer').startup(function(use)
     --     end
     -- }
 
-    --Fuzzy Finding
-    use 'nvim-lua/telescope.nvim'
     -- Nice view for keys (good why learning vim)
     use {
         "folke/which-key.nvim",

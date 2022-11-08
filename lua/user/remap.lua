@@ -1,8 +1,6 @@
 local nnoremap = require("user.keymap").nnoremap
 local inoremap = require("user.keymap").inoremap
 
-
-nnoremap("<leader>pv", "<cmd>Ex<CR>")
 nnoremap('x', '"_x') -- not yank "x"
 
 -- Increment/decrement
