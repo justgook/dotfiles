@@ -1,6 +1,8 @@
 local nnoremap = require("user.keymap").nnoremap
 local inoremap = require("user.keymap").inoremap
 
+vim.g.mapleader = " "
+
 nnoremap('x', '"_x') -- not yank "x"
 
 -- Increment/decrement
