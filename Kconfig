@@ -1,0 +1,27 @@
+mainmenu "Global App configuration"
+
+config REMOTE_GIT_REPO
+   	string "Git repo to save/load configs"
+   	default "git@github.com:justgook/dotfiles.git"
+
+config ENABLE_YABAI
+    bool "Use Yabai"
+    default y
+
+config ENABLE_NVIM
+    bool "Use NeoVim"
+    default y
+
+config ENABLE_FISH
+    bool "Use fish"
+    default y
+
+config ENABLE_KARABINER
+    bool "Use karabiner"
+    default y
+
+config ENABLE_ALACRITTY
+    bool "Use alacritty"
+    default y
+
+

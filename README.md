@@ -1,12 +1,5 @@
-Fix worktrees fetches:
-git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*" 
+# My MacOS configuration (M1-M2)
 
-## Setup Commands
-```bash 
-defaults write com.apple.Finder AppleShowAllFiles true # always show hidden files
-```
-
-Disable Annoying Disk Warning (must restart Mac to take effect): 
-```bash
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.DiskArbitration.diskarbitrationd.plist DADisableEjectNotification -bool YES && sudo pkill diskarbitrationd
-```
+1. clone repo to home folred `git clone $REPO ~/.dotfiles` 
+2. run `make` from `~/.dotfiles`
+3. run `make` again to update / save congigurations
