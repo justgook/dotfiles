@@ -4,6 +4,7 @@ SHELL := bash
 .DELETE_ON_ERROR:
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
+include make/colors.mk
 
 # Run with "make V=1" to see the actual compile commands
 ifdef V
@@ -13,160 +14,105 @@ Q=@
 MAKEFLAGS += --no-print-directory
 endif
 
+MKDIR_P ?= mkdir -p
+CP ?= cp -f
+.DEFAULT_GOAL := help
 
+ifeq (, $(shell which brew))
+$(error "No brew in $(PATH), consider doing apt-get install brew")
+endif
 
+BUILD_DIR ?= ..
 #====== MENU CONFIG START=======#
 PYTHON=python3
 KCONFIG_CONFIG ?= $(CURDIR)/.config
 
 export KCONFIG_CONFIG
+
 #escaping CURDIR spaces
 space := $(subst ,, )
 KCONFIG_CONFIG_ESCAPED := $(subst $(space),\$(space),$(KCONFIG_CONFIG))
 
+ifneq ($(MAKECMDGOALS),clean)
 -include $(KCONFIG_CONFIG_ESCAPED)
+endif
+
 
 config: menuconfig
 menuconfig:
 	$(Q)$(PYTHON) make/menuconfig.py Kconfig
-
 .PHONY: menuconfig, config
 #====== MENU CONFIG END=======#
+TARGETS :=
 
-.DEFAULT_GOAL := help
-
-# Reset
-Color_Off=\033[0m
-
-# Regular Colors
-Black=\033[0;30m
-Red=\033[0;31m
-Green=\033[0;32m
-Yellow=\033[0;33m
-Blue=\033[0;34m
-Purple=\033[0;35m
-Cyan=\033[0;36m
-White=\033[0;37m
-
-# Bold
-BBlack=\033[1;30m
-BRed=\033[1;31m
-BGreen=\033[1;32m
-BYellow=\033[1;33m
-BBlue=\033[1;34m
-BPurple=\033[1;35m
-BCyan=\033[1;36m
-BWhite=\033[1;37m
-
-# Underline
-UBlack=\033[4;30m
-URed=\033[4;31m
-UGreen=\033[4;32m
-UYellow=\033[4;33m
-UBlue=\033[4;34m
-UPurple=\033[4;35m
-UCyan=\033[4;36m
-UWhite=\033[4;37m
-
-# Background
-On_Black=\033[40m
-On_Red=\033[41m
-On_Green=\033[42m
-On_Yellow=\033[43m
-On_Blue=\033[44m
-On_Purple=\033[45m
-On_Cyan=\033[46m
-On_White=\033[47m
-
-# High Intensity
-IBlack=\033[0;90m
-IRed=\033[0;91m
-IGreen=\033[0;92m
-IYellow=\033[0;93m
-IBlue=\033[0;94m
-IPurple=\033[0;95m
-ICyan=\033[0;96m
-IWhite=\033[0;97m
-
-# Bold High Intensity
-BIBlack=\033[1;90m
-BIRed=\033[1;91m
-BIGreen=\033[1;92m
-BIYellow=\033[1;93m
-BIBlue=\033[1;94m
-BIPurple=\033[1;95m
-BICyan=\033[1;96m
-BIWhite=\033[1;97m
-
-# High Intensity backgrounds
-On_IBlack=\033[0;100m
-On_IRed=\033[0;101m
-On_IGreen=\033[0;102m
-On_IYellow=\033[0;103m
-On_IBlue=\033[0;104m
-On_IPurple=\033[0;105m
-On_ICyan=\033[0;106m
-On_IWhite=\033[0;107m
-
-RUNNER = npm
-ifneq ("$(wildcard yarn.lock)","")
-  RUNNER = yarn
+ifdef CONFIG_ENABLE_YABAI
+	TARGETS = yabai
+endif
+ifdef CONFIG_ENABLE_NVIM
+	TARGETS += nvim
+endif
+ifdef CONFIG_ENABLE_FISH
+	TARGETS += fish
+endif
+ifdef CONFIG_ENABLE_KARABINER
+	TARGETS += karabiner
+endif
+ifdef CONFIG_ENABLE_ALACRITTY
+	TARGETS += alacritty
 endif
 
 help: $(KCONFIG_CONFIG_ESCAPED)
-	@echo -e "Available commands:"
-	@echo -e "$(BICyan)config$(Color_Off)          -     (re)configure applications to use"
-	@echo -e "$(BICyan)save$(Color_Off)            -     save $(Red)ALL$(Color_Off) configuration to remote"
-	@echo -e "$(BICyan)update$(Color_Off)          -     load $(Red)ALL$(Color_Off) application configuration from git"
-	@echo -e "$(BICyan)save/$(Purple)[app]$(BICyan)$(Color_Off)      -     save configuration for application"
-	@echo -e "$(BICyan)load/$(Purple)[app]$(BICyan)$(Color_Off)      -     load application configuration from git"
-	@echo -e "$(BICyan)clean$(Color_Off)           -     clean configuration files"
-	@echo -e ""
-	@echo -e "Available applications:"
-ifdef CONFIG_ENABLE_YABAI
-	@echo -e " • $(Purple)yabai$(Color_Off)"
-endif
-ifdef CONFIG_ENABLE_NVIM
-	@echo -e " • $(Purple)nvim$(Color_Off)"
-endif
-ifdef CONFIG_ENABLE_FISH
-	@echo -e " • $(Purple)fish$(Color_Off)"
-endif
-ifdef CONFIG_ENABLE_KARABINER
-	@echo -e " • $(Purple)karabiner$(Color_Off)"
-endif
-ifdef CONFIG_ENABLE_ALACRITTY
-	@echo -e " • $(Purple)alacritty$(Color_Off)"
-endif
+	$(Q)echo -e "Available commands:"
+	$(Q)echo -e "$(BICyan)config$(Color_Off)          -     (re)configure applications to use"
+	$(Q)echo -e "$(BICyan)save$(Color_Off)            -     save $(Red)ALL$(Color_Off) configuration to remote"
+	$(Q)echo -e "$(BICyan)update$(Color_Off)          -     load $(Red)ALL$(Color_Off) application configuration from git"
+	$(Q)echo -e "$(BICyan)save/$(Purple)[app]$(BICyan)$(Color_Off)      -     save configuration for application"
+	$(Q)echo -e "$(BICyan)load/$(Purple)[app]$(BICyan)$(Color_Off)      -     load application configuration from git"
+	$(Q)echo -e "$(BICyan)clean$(Color_Off)           -     clean configuration files"
+	$(Q)echo -e ""
+	$(Q)echo -e "Available applications:"
+	$(Q)for app in $(TARGETS); do \
+        echo -e " • $(Purple)$$app$(Color_Off)"; \
+    done
+
 .PHONY: help
 
-clean:
-	$(Q)git clean -xdf
-.PHONY: clean
+PRODUCT_DIRS := $(addprefix $(BUILD_DIR)/,$(TARGETS))
+UPDATE_DIRS := $(addprefix update/,$(TARGETS))
+SAVE_DIRS := $(addprefix save/,$(TARGETS))
 
-save: $(KCONFIG_CONFIG_ESCAPED)
+save: $(SAVE_DIRS)
 .PHONY: save
 
-update: $(KCONFIG_CONFIG_ESCAPED)
-ifdef CONFIG_ENABLE_YABAI
-	@echo -e " • $(Purple)yabai$(Color_Off)"
-endif
-ifdef CONFIG_ENABLE_NVIM
-	@echo -e " • $(Purple)nvim$(Color_Off)"
-endif
-ifdef CONFIG_ENABLE_FISH
-	@echo -e " • $(Purple)fish$(Color_Off)"
-endif
-ifdef CONFIG_ENABLE_KARABINER
-	@echo -e " • $(Purple)karabiner$(Color_Off)"
-endif
-ifdef CONFIG_ENABLE_ALACRITTY
-	@echo -e " • $(Purple)alacritty$(Color_Off)"
-endif
+update: $(UPDATE_DIRS)
 .PHONY: update
+
+$(SAVE_DIRS): $(PRODUCT_DIRS)
+	$(Q)echo -e " • $(Purple)$(notdir $@)$(Color_Off)"
+	$(Q)cd $(addprefix $(BUILD_DIR)/,$(notdir $@)) && git commit -am "$${GITMOJI:-♻️} $${COMMIT:-v$(shell date +'%Y%m%d.%H%M')}"
+	$(Q)echo "git push"
+.PHONY: $(UPDATE_DIRS)
+
+$(UPDATE_DIRS): $(PRODUCT_DIRS)
+	$(Q)echo -e " • $(Purple)$(notdir $@)$(Color_Off)"
+	$(Q)cd $(addprefix $(BUILD_DIR)/,$(notdir $@)) && git pull
+.PHONY: $(UPDATE_DIRS)
+
+$(PRODUCT_DIRS): $(KCONFIG_CONFIG_ESCAPED)
+	if [ -d $(@F) ]; then echo "$(@F) already exists"; else git worktree add -f $@ $(@F); fi
+
 
 $(KCONFIG_CONFIG_ESCAPED):
 	$(Q)$(PYTHON) make/menuconfig.py Kconfig
 
-MKDIR_P ?= mkdir -p
-CP ?= cp -f
+clean:
+	$(Q)git clean -xdf
+	$(Q)rm -rf $(PRODUCT_DIRSl)
+.PHONY: clean
+
+
+#export XDG_CONFIG_HOME=~/nvim-tryout/config
+#export XDG_DATA_HOME=~/nvim-tryout/data
+#
+#mkdir -p $XDG_DATA_HOME $XDG_CONFIG_HOME
+#nvim
