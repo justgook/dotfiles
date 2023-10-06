@@ -2,6 +2,7 @@
 ### GLOBAL VARIABLES
 #
 
+set fish_greeting ""
 # colors for ls command
 set -gx lscolors "cxbgdxdxbxdgeghegeacad"
 
@@ -80,6 +81,4 @@ set __fish_git_prompt_char_upstream_prefix ' '
 set fish_prompt_pwd_dir_length 0
 
 # fish_prompt defined in ~/.config/fish/functions/fish_prompt.fish
-
-
 

@@ -1,9 +1,11 @@
+alias :q="exit"
+alias cd..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 alias ls="ls -FG"
-alias rm="rm -i"
+alias rm="trash"
 alias ssh_tunnel_bg="ssh -f -N"
 alias sha256sum="shasum -a 256"
 alias who8080="lsof -i tcp:8080"
